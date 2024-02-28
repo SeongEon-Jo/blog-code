@@ -13,7 +13,9 @@ ReentrantLock fairReentrantLock = new ReentrantLock(true);
 ReentrantLock unfairReentrantLock = new ReentrantLock(false);
 ```
 여기서 "공정"하다라는 의미는, 락 획득을 대기 중인 스레드들에 대하여 가장 오래 기다린 스레드에게 먼저 락을 점유하도록 한다는 것을 의미한다.
-![스크린샷 2024-02-27 오후 10.39.26.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-02-27%20%EC%98%A4%ED%9B%84%2010.39.26.png)
+
+<img width="806" alt="스크린샷 2024-02-27 오후 10 39 26" src="https://github.com/SeongEon-Jo/blog-code/assets/62459414/c55a9e5c-94ad-4354-bd2d-3e1056ae2924">
+
 `fair`인자 여부에 따라 아예 다른 인스턴스를 생성해주는 것을 확인할 수 있다.
 
 # 잠금 방식
@@ -46,7 +48,10 @@ public class ReentrantLockBookCountService {
 
 ### 2. `tryLock()`
 `tryLock()`은 `lock()`과 다르게 만약 다른 스레드에 의해 락이 점유되고 있다면 락 획득을 실패처리한다.
-![스크린샷 2024-02-28 오후 8.42.01.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-02-28%20%EC%98%A4%ED%9B%84%208.42.01.png)
+
+<img width="590" alt="스크린샷 2024-02-28 오후 8 42 01" src="https://github.com/SeongEon-Jo/blog-code/assets/62459414/fbab1cd7-f8c8-4f71-a071-1a867f1d93b7">
+
+
 이에 따라, 리턴값에서도 확인할 수 있듯 락 획득 성공 혹은 실패 여부를 `boolean`타입으로 반환한다.
 
 사용법은 아래와 같다.
@@ -96,9 +101,10 @@ void concurrentTest(int executeCount, Runnable methodToTest) throws InterruptedE
     countDownLatch.await();
 }
 ```
-![스크린샷 2024-02-28 오후 8.53.07.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-02-28%20%EC%98%A4%ED%9B%84%208.53.07.png)
 
-`tryLock()`에 타임아웃을 설정하는 것도 가능하다.
+<img width="517" alt="스크린샷 2024-02-28 오후 8 53 07" src="https://github.com/SeongEon-Jo/blog-code/assets/62459414/c048d34d-0cc8-41ea-8441-cbbc72721f5a">
+
+아래 코드처럼 `tryLock()`에 타임아웃을 설정하는 것 또한 가능하다.
 
 이를 사용하면 지정된 타임아웃 시간동안 락 획득을 시도할 것이고, 타임아웃이 경과하면 그때서야 실패 처리시킬 것이다.
 
